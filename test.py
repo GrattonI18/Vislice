@@ -5,7 +5,7 @@ def je_prast(n):
         if n % i == 0:
             return False
     return True
-
+kkkkkkkkkkkkkkkkkkkkkkkkkkkk
 for x in range(2, 200):
     if je_prast(x):
         print(x)
