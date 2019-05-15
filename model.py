@@ -27,7 +27,7 @@ class Igra:
 
     def zmaga(self):
         for crka in self.geslo:
-            if crka in self.crke:
+            if crka not in self.crke:
                 return False
         return True
     
