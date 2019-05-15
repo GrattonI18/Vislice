@@ -1,3 +1,5 @@
+import random
+
 STEVILO_DOVOLJENIH_NAPAK = 10
 PRAVILNA_CRKA = '+'
 PONOVLJENA_CRKA = 'O'
@@ -41,11 +43,28 @@ class Igra:
                 delni += '_ '
         return delni
 
-testno_geslo = 'požrtvovalnost'
-testne_crke = ['a', 'e', 'o', 'p']
-igra = Igra(testno_geslo, testne_crke)
-print(igra.napacne_crke())
-print(igra.pravilne_crke())
-print(igra.stevilo_napak())
-print(igra.zmaga())
-print(igra.pravilni_del_gesla())
+    def nepravilni_ugibi(self):
+        return ' '.join(self.napacne_crke())
+
+    def ugibaj(self, crka):
+        crka = crka.upper()
+        if crka in self.crke:
+            return PONOVLJENA_CRKA
+        else:
+            self.crke.append(crka)
+        if crka in self.geslo:
+            if self.zmaga():
+                return ZMAGA
+            else:
+                return PRAVILNA_CRKA
+        else:
+            if self.poraz():
+                return PORAZ
+            else:
+                return NAPACNA_CRKA
+
+with open('besede.txt','r', encoding = 'utf-8') as datoteka_z_besedami:
+    bazen_besed = [vrstica.strip().upper() for vrstica in datoteka_z_besedami]
+
+def nova_igra():
+    return Igra(random.choice(bazen_besed))
